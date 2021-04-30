@@ -4,7 +4,6 @@ from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 from time import sleep
 from requests import post
-from base64 import b64decode
 import pytz,os
 
 TG_API='https://api.telegram.org/bot'
@@ -19,8 +18,7 @@ client = TelegramClient(StringSession(session), api_id, api_hash)
 def botSend(fileName, tes ,pat):
     files = {pat: (fileName, open(fileName,'rb'))}
     for log_user in log_users:
-        r = post(BOT_url+tes+'&chat_id='+log_user, files=files)
-        
+        r = post(BOT_url+tes+'&chat_id='+log_user, files=files)        
 def utc_to_time(naive, timezone="Asia/Kolkata"):
     return naive.replace(tzinfo=pytz.utc).astimezone(pytz.timezone(timezone))
 def dirup(event,sender,pat,tgapi):
