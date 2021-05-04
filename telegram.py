@@ -53,7 +53,7 @@ async def my_event_handler(event):
             sleep(2)
             await dirup(event,sender,pat,tgapi)
         else:
-            tes ="@"+ str(sender.username)+"   "+str(event.text)+"   "+str(utc_to_time(event.date))
+            tes ="@"+ str(sender.username)+"\n"+str(event.text)+"\n"+str(utc_to_time(event.date))
             eentity = await client.get_entity(event.original_update.user_id)
             print(eentity.username)
             if sender.username==ownerunam:
