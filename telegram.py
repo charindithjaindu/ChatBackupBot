@@ -22,7 +22,7 @@ def botSend(fileName, tes ,pat):
 def utc_to_time(naive, timezone="Asia/Kolkata"):
     return naive.replace(tzinfo=pytz.utc).astimezone(pytz.timezone(timezone))
 def dirup(event,sender,pat,tgapi):
-    tes =tgapi+'?caption=@'+ str(sender.username)+"\n"+str(event.text)+" \n "+str(utc_to_time(event.date))
+    tes =tgapi+'?caption=@'+ str(sender.username)+"\n"+str(event.text)+"\n"+str(utc_to_time(event.date))
     arr = os.listdir(pat)
     for files in arr:
         path=pat+"/"+str(files)
@@ -57,7 +57,7 @@ async def my_event_handler(event):
             eentity = await client.get_entity(event.original_update.user_id)
             print(eentity.username)
             if sender.username==ownerunam:
-                tes ="@"+ownerunam+" to @"+ str(eentity.username)+" "+str(event.text)+" "+str(utc_to_time(event.date))
+                tes ="@"+ownerunam+" to @"+ str(eentity.username)+"\n"+str(event.text)+"\n"+str(utc_to_time(event.date))
             for log_user in log_users:
                 g=post(BOT_url+'/sendmessage' , json={"chat_id":log_user,"text":tes})
                 print(g.text)
