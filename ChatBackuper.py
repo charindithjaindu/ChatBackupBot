@@ -21,15 +21,20 @@ def utc_to_time(naive, timezone="Asia/Kolkata"):
     dt_object = datetime.fromtimestamp(naive)
     return dt_object.replace(tzinfo=pytz.utc).astimezone(pytz.timezone(timezone))
 
-def dirup(message,pat,tgapi,otherr):
+async def dirup(message,pat,tgapi,otherr):
 	pat=pat[:-1]
 	tes =tgapi+'?caption='+otherr+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.caption)+"\n"+str(utc_to_time(message.date))
 	print(tes)
 	arr = os.listdir(pat)
 	for files in arr:
-		path=pat+"/"+str(files)
-		botSend(path,tes,pat)
-		os.remove(path)
+		pathh=pat+"/"+str(files)
+		file_size=os.stat(pathh).st_size
+		if file_size<52428800 :
+			botSend(pathh,tes,pat)
+			os.remove(pathh)
+		else:
+			print('file size is too big')
+			await message.forward(log_channel)
 
 def botSend(fileName, tes ,pat):
     files = {pat: (fileName, open(fileName,'rb'))}  
@@ -59,7 +64,7 @@ async def msg_photo(client: Client, message: Message):
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
-	dirup(message,pat,tgapi,otherr)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.video & filters.private & ~filters.bot)
 async def msg_video(client: Client, message: Message):
@@ -71,7 +76,7 @@ async def msg_video(client: Client, message: Message):
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
-	dirup(message,pat,tgapi,otherr)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.audio & filters.private & ~filters.bot)
 async def msg_audio(client: Client, message: Message):
@@ -83,7 +88,7 @@ async def msg_audio(client: Client, message: Message):
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
-	dirup(message,pat,tgapi,otherr)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.media & filters.private & ~filters.bot & ~filters.photo & ~filters.video & ~filters.audio & ~filters.poll)
 async def msg_document(client: Client, message: Message):
@@ -95,7 +100,7 @@ async def msg_document(client: Client, message: Message):
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
-	dirup(message,pat,tgapi,otherr)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.media_group & filters.private & ~filters.bot)
 async def media_album(client: Client, message: Message):
