@@ -71,7 +71,7 @@ async def msg_video(client: Client, message: Message):
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
-	await dirup(message,pat,tgapi,otherr)
+	dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.audio & filters.private & ~filters.bot)
 async def msg_audio(client: Client, message: Message):
