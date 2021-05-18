@@ -71,6 +71,7 @@ async def msg_video(client: Client, message: Message):
 	print('video recived')
 	pat='video/'
 	tgapi='/sendVideo'
+	print(message.video.file_size)
 	if message.from_user.username  == myuserid:
 		otherr='From me to @'
 	else:
@@ -95,6 +96,7 @@ async def msg_document(client: Client, message: Message):
 	print('document recived')
 	pat='document/'
 	tgapi='/sendDocument'
+	print(message.document.file_size)
 	if message.from_user.username  == myuserid:
 		otherr='From me to @'
 	else:
