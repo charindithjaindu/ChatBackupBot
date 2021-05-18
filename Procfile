@@ -1,1 +1,1 @@
-worker: python3 telegram.py
+worker: python3 ChatBackuper.py
