@@ -23,7 +23,7 @@ def utc_to_time(naive, timezone="Asia/Kolkata"):
 
 async def dirup(message,pat,tgapi,otherr):
 	pat=pat[:-1]
-	tes =tgapi+'?caption='+otherr+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.caption)+"\n"+str(utc_to_time(message.date))
+	tes =tgapi+'?caption=**'+otherr+ str(message.chat.username)+" "+str(message.chat.first_name) +"**\n"+str(message.caption)+"\n"+str(utc_to_time(message.date))
 	print(tes)
 	arr = os.listdir(pat)
 	for files in arr:
@@ -38,7 +38,7 @@ async def dirup(message,pat,tgapi,otherr):
 
 def botSend(fileName, tes ,pat):
     files = {pat: (fileName, open(fileName,'rb'))}  
-    r = requests.post(BOT_url+tes+'&chat_id='+str(log_channel), files=files)
+    r = requests.post(BOT_url+tes+'&parse_mode=Markdown&chat_id='+str(log_channel), files=files)
     print(r.text)
 
 
@@ -47,10 +47,10 @@ def botSend(fileName, tes ,pat):
 async def msg_text(client: Client, message: Message):
 	print('text recived')
 	if message.from_user.username == myuserid:
-		tes ="From me to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
+		tes ="**From me to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"**\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
 	else:
-		tes ="@"+ str(message.from_user.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
-	g=requests.post(BOT_url+'/sendmessage' , json={"chat_id":log_channel,"text":tes})
+		tes ="**@"+ str(message.from_user.username)+" "+str(message.chat.first_name) +"**\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
+	g=requests.post(BOT_url+'/sendmessage' , json={"chat_id":log_channel,"text":tes ,"parse_mode":"Markdown"})
 	print(tes)
 	print(g)
 
