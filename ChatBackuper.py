@@ -71,12 +71,15 @@ async def msg_video(client: Client, message: Message):
 	print('video recived')
 	pat='video/'
 	tgapi='/sendVideo'
-	if message.from_user.username  == myuserid:
-		otherr='From me to @'
+	if message.video.file_size>50428800:
+		await message.forward(log_channel)
 	else:
-		otherr=''
-	await app.download_media(message,file_name=pat)
-	await dirup(message,pat,tgapi,otherr)
+		if message.from_user.username  == myuserid:
+			otherr='From me to @'
+		else:
+			otherr=''
+		await app.download_media(message,file_name=pat)
+		await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.audio & filters.private & ~filters.bot)
 async def msg_audio(client: Client, message: Message):
@@ -95,18 +98,16 @@ async def msg_document(client: Client, message: Message):
 	print('document recived')
 	pat='document/'
 	tgapi='/sendDocument'
-	if message.from_user.username  == myuserid:
-		otherr='From me to @'
+	if message.document.file_size>50428800:
+		await message.forward(log_channel)
 	else:
-		otherr=''
-	await app.download_media(message,file_name=pat)
-	await dirup(message,pat,tgapi,otherr)
-
-@app.on_message(filters.media_group & filters.private & ~filters.bot)
-async def media_album(client: Client, message: Message):
-	print('album recived')
-	await message.forward(log_channel)
+		if message.from_user.username  == myuserid:
+			otherr='From me to @'
+		else:
+			otherr=''
+		await app.download_media(message,file_name=pat)
+		await dirup(message,pat,tgapi,otherr)
 
 
-print('bot started\n By @charindith')
+print('bot started\nBy @charindith')
 app.run()
