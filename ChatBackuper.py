@@ -29,7 +29,7 @@ async def dirup(message,pat,tgapi,otherr):
 	for files in arr:
 		pathh=pat+"/"+str(files)
 		file_size=os.stat(pathh).st_size
-		if file_size<50428800 :
+		if file_size<52428800 :
 			botSend(pathh,tes,pat)
 			os.remove(pathh)
 		else:
@@ -72,16 +72,12 @@ async def msg_video(client: Client, message: Message):
 	pat='video/'
 	tgapi='/sendVideo'
 	print(message.video.file_size)
-	if message.video.file_size>50428800:
-		await message.forward(log_channel)
-
+	if message.from_user.username  == myuserid:
+		otherr='From me to @'
 	else:
-		if message.from_user.username  == myuserid:
-			otherr='From me to @'
-		else:
-			otherr=''
-		await app.download_media(message,file_name=pat)
-		await dirup(message,pat,tgapi,otherr)
+		otherr=''
+	await app.download_media(message,file_name=pat)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.audio & filters.private & ~filters.bot)
 async def msg_audio(client: Client, message: Message):
@@ -101,16 +97,12 @@ async def msg_document(client: Client, message: Message):
 	pat='document/'
 	tgapi='/sendDocument'
 	print(message.document.file_size)
-	if message.document.file_size>50428800:
-		await message.forward(log_channel)
+	if message.from_user.username  == myuserid:
+		otherr='From me to @'
 	else:
-
-		if message.from_user.username  == myuserid:
-			otherr='From me to @'
-		else:
-			otherr=''
-		await app.download_media(message,file_name=pat)
-		await dirup(message,pat,tgapi,otherr)
+		otherr=''
+	await app.download_media(message,file_name=pat)
+	await dirup(message,pat,tgapi,otherr)
 
 @app.on_message(filters.media_group & filters.private & ~filters.bot)
 async def media_album(client: Client, message: Message):
