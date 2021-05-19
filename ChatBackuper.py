@@ -46,7 +46,7 @@ def botSend(fileName, tes ,pat):
 async def msg_text(client: Client, message: Message):
 	print('text recived')
 	if message.from_user.username == myuserid:
-		tes ="From "+myuserid+" to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
+		tes ="From @"+myuserid+" to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
 	else:
 		tes ="@"+ str(message.from_user.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
 	g=requests.post(BOT_url+'/sendmessage' , json={"chat_id":log_channel,"text":tes})
@@ -59,7 +59,7 @@ async def msg_photo(client: Client, message: Message):
 	pat='photo/'
 	tgapi='/sendPhoto'
 	if message.from_user.username  == myuserid:
-		otherr='From '+myuserid+' to @'
+		otherr='From @'+myuserid+' to @'
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
@@ -74,7 +74,7 @@ async def msg_video(client: Client, message: Message):
 		await message.forward(log_channel)
 	else:
 		if message.from_user.username  == myuserid:
-			otherr='From '+myuserid+' to @'
+			otherr='From @'+myuserid+' to @'
 		else:
 			otherr=''
 		await app.download_media(message,file_name=pat)
@@ -86,7 +86,7 @@ async def msg_audio(client: Client, message: Message):
 	pat='audio/'
 	tgapi='/sendAudio'
 	if message.from_user.username  == myuserid:
-		otherr='From '+myuserid+' to @'
+		otherr='From @'+myuserid+' to @'
 	else:
 		otherr=''
 	await app.download_media(message,file_name=pat)
@@ -101,7 +101,7 @@ async def msg_document(client: Client, message: Message):
 		await message.forward(log_channel)
 	else:
 		if message.from_user.username  == myuserid:
-			otherr='From '+myuserid+' to @'
+			otherr='From @'+myuserid+' to @'
 		else:
 			otherr=''
 		await app.download_media(message,file_name=pat)
