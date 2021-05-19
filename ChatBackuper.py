@@ -23,7 +23,7 @@ def utc_to_time(naive, timezone="Asia/Kolkata"):
 
 async def dirup(message,pat,tgapi,otherr):
 	pat=pat[:-1]
-	tes =tgapi+'?caption=**'+otherr+ str(message.chat.username)+" "+str(message.chat.first_name) +"**\n"+str(message.caption)+"\n"+str(utc_to_time(message.date))
+	tes =tgapi+'?caption='+otherr+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.caption)+"\n"+str(utc_to_time(message.date))
 	print(tes)
 	arr = os.listdir(pat)
 	for files in arr:
@@ -38,8 +38,8 @@ async def dirup(message,pat,tgapi,otherr):
 
 def botSend(fileName, tes ,pat):
     files = {pat: (fileName, open(fileName,'rb'))}  
-    r = requests.post(BOT_url+tes+'&parse_mode=Markdown&chat_id='+str(log_channel), files=files)
-    print(r.text)
+    r = requests.post(BOT_url+tes+'&chat_id='+str(log_channel), files=files)
+    print(r)
 
 
 
@@ -47,10 +47,10 @@ def botSend(fileName, tes ,pat):
 async def msg_text(client: Client, message: Message):
 	print('text recived')
 	if message.from_user.username == myuserid:
-		tes ="**From me to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"**\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
+		tes ="From me to @"+ str(message.chat.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
 	else:
-		tes ="**@"+ str(message.from_user.username)+" "+str(message.chat.first_name) +"**\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
-	g=requests.post(BOT_url+'/sendmessage' , json={"chat_id":log_channel,"text":tes ,"parse_mode":"Markdown"})
+		tes ="@"+ str(message.from_user.username)+" "+str(message.chat.first_name) +"\n"+str(message.text)+"\n"+str(utc_to_time(message.date))
+	g=requests.post(BOT_url+'/sendmessage' , json={"chat_id":log_channel,"text":tes})
 	print(tes)
 	print(g)
 
@@ -71,7 +71,6 @@ async def msg_video(client: Client, message: Message):
 	print('video recived')
 	pat='video/'
 	tgapi='/sendVideo'
-	print(message.video.file_size)
 	if message.from_user.username  == myuserid:
 		otherr='From me to @'
 	else:
@@ -96,7 +95,6 @@ async def msg_document(client: Client, message: Message):
 	print('document recived')
 	pat='document/'
 	tgapi='/sendDocument'
-	print(message.document.file_size)
 	if message.from_user.username  == myuserid:
 		otherr='From me to @'
 	else:
