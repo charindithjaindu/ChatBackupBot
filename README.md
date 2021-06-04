@@ -11,4 +11,4 @@ The easiest way to deploy this
 
 ## Video Tutorial 🎥
 NOTE: Video is outdated, use pyrogram string instead of telethon
-  [![Tutorial](image_2021-04-30_070910.png)](https://youtu.be/NBKnb3KT5Bg "Tutorial")
+  [![Tutorial](thumb.png)](https://youtu.be/8NsP4UdPFyE "Tutorial")
