@@ -1,5 +1,5 @@
 # Chat Backup Bot
-## A telegram bot that can backup your chats realtime
+## A telegram bot that can backup your chats realtime without showing you online
 
 ## How To Host
 
