@@ -2,8 +2,7 @@
 ## A telegram bot that can backup your chats realtime without showing you online
 
 ## How To Host
-
-First of all you need to add the bot to log channel
+Too lazy to explain. please watch the video ;)
 
 The easiest way to deploy this
 
