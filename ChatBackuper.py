@@ -2,9 +2,6 @@ import requests
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import os
-import pytz
-from datetime import datetime
-
 
 TOKEN=os.getenv("BOT_TOKEN")
 session=os.getenv("SESSION")
